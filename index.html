@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy 18th Birthday Pratham 🇮🇳</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:sans-serif;background:#0a0a0a;color:#fff;overflow-x:hidden}
+
+:root{
+--navy:#1e3a8a;
+--green:#166534;
+--gold:#f59e0b;
+}
+
+section{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:2rem;
+}
+
+.hero{
+background:linear-gradient(135deg,#000,#1e3a8a);
+}
+.hero h1{
+font-size:2.5rem;
+color:var(--gold);
+}
+#typewriter{
+font-size:1.3rem;
+margin-top:1rem;
+}
+
+/* CARD */
+.card{
+background:rgba(255,255,255,0.05);
+padding:2.5rem;
+border-radius:20px;
+max-width:900px;
+}
+
+/* GALLERY */
+.gallery{
+display:flex;
+flex-wrap:wrap;
+gap:1rem;
+justify-content:center;
+}
+
+.img{
+width:300px;
+height:220px;
+border-radius:20px;
+background-size:cover;
+background-position:center;
+transition:0.4s;
+box-shadow:0 10px 30px rgba(0,0,0,0.5);
+}
+.img:hover{
+transform:scale(1.1);
+filter:brightness(1.2);
+}
+
+/* MUSIC BUTTON */
+.music{
+position:fixed;
+top:20px;
+right:20px;
+background:var(--navy);
+padding:10px 15px;
+border-radius:50px;
+cursor:pointer;
+}
+
+/* COUNTDOWN */
+#countdown{
+font-size:2rem;
+margin-top:20px;
+color:var(--gold);
+}
+</style>
+</head>
+
+<body>
+
+<div class="music" id="musicBtn">🎵 Play Music</div>
+
+<!-- HERO -->
+<section class="hero">
+<div>
+<h1>Happy 18th Birthday, Pratham 🎉</h1>
+<div id="typewriter"></div>
+</div>
+</section>
+
+<!-- ABOUT -->
+<section>
+<div class="card">
+<h2>⚔️ The Warrior Begins</h2>
+<p>18 is not just an age, it's the beginning of your mission.</p>
+<p>Discipline • Dedication • Determination</p>
+</div>
+</section>
+
+<!-- NDA COUNTDOWN -->
+<section>
+<div class="card">
+<h2>🎖️ NDA Journey Begins</h2>
+<div id="countdown"></div>
+</div>
+</section>
+
+<!-- DEFENCE IMAGES -->
+<section>
+<div class="card">
+<h2>🏅 Defence Glory</h2>
+<div class="gallery">
+<div class="img" style="background:url('img1.jpg')"></div>
+<div class="img" style="background:url('img2.jpg')"></div>
+<div class="img" style="background:url('img3.jpg')"></div>
+</div>
+</div>
+</section>
+
+<!-- PERSONAL IMAGES -->
+<section>
+<div class="card">
+<h2>🔥 Cadet Pratham</h2>
+<div class="gallery">
+<div class="img" style="background:url('img4.jpg')"></div>
+<div class="img" style="background:url('img5.jpg')"></div>
+<div class="img" style="background:url('img6.jpg')"></div>
+</div>
+<p style="margin-top:20px;color:var(--gold);">
+From today → Cadet mindset begins 💪
+</p>
+</div>
+</section>
+
+<!-- FINAL -->
+<section>
+<div class="card">
+<h2>🇮🇳 Future Officer</h2>
+<p>All the Best, Cadet Pratham. Bharat awaits you.</p>
+<button onclick="confetti()">Celebrate 🎉</button>
+</div>
+</section>
+
+<script>
+
+/* TYPEWRITER */
+const text = "All the Best, Cadet Pratham 🇮🇳";
+let i = 0;
+
+function typing() {
+    if (i < text.length) {
+        document.getElementById("typewriter").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typing, 60);
+    }
+}
+typing();
+
+/* MUSIC */
+const audio = new Audio("https://cdn.pixabay.com/download/audio/2022/10/25/audio_946b6f0e65.mp3?filename=inspiring-cinematic-ambient-116199.mp3");
+audio.loop = true;
+audio.volume = 0.4;
+
+let playing = false;
+
+document.getElementById("musicBtn").onclick = () => {
+    if (!playing) {
+        audio.play().catch(()=>alert("Tap again 🔊"));
+        document.getElementById("musicBtn").innerText="⏸ Stop";
+        playing = true;
+    } else {
+        audio.pause();
+        document.getElementById("musicBtn").innerText="🎵 Play Music";
+        playing = false;
+    }
+};
+
+/* COUNTDOWN */
+const target = new Date("2026-04-01").getTime();
+
+setInterval(()=>{
+let now = new Date().getTime();
+let d = target - now;
+let days = Math.floor(d/(1000*60*60*24));
+document.getElementById("countdown").innerHTML = days+" Days to NDA 🚀";
+},1000);
+
+/* CONFETTI */
+function confetti(){
+for(let i=0;i<60;i++){
+let el=document.createElement("div");
+
+el.style.position="fixed";
+el.style.width="6px";
+el.style.height="6px";
+el.style.background="gold";
+el.style.top="-10px";
+el.style.left=Math.random()*window.innerWidth+"px";
+el.style.borderRadius="50%";
+
+document.body.appendChild(el);
+
+let speed=Math.random()*3+2;
+
+let fall=setInterval(()=>{
+el.style.top=(parseFloat(el.style.top)+speed)+"px";
+
+if(parseFloat(el.style.top)>window.innerHeight){
+clearInterval(fall);
+el.remove();
+}
+},20);
+}
+}
+
+</script>
+
+</body>
+</html>
